@@ -29,7 +29,7 @@ namespace GasApp
             menutabs.Items.Add(new ShellContent
             {
                 Title = "Mapa",
-                Icon = "plaza.png",
+                Icon = "mapa.png",
                 ContentTemplate = new DataTemplate(typeof(MapaView)),
             });
 
