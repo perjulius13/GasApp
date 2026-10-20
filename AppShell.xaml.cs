@@ -7,7 +7,36 @@ namespace GasApp
         public AppShell()
         {
             InitializeComponent();
+
+
+            BottomMenu();
+
+            generales();
+
         }
+
+
+        public void BottomMenu()
+        {
+
+            menutabs.Items.Add(new ShellContent
+            {
+                Title = "Home",
+                Icon = "hogar.png",
+                ContentTemplate = new DataTemplate(typeof(HomeView)),
+            });
+
+            menutabs.Items.Add(new ShellContent
+            {
+                Title = "Mapa",
+                Icon = "plaza.png",
+                ContentTemplate = new DataTemplate(typeof(MapaView)),
+            });
+
+
+        }
+
+
 
 
         public void generales()

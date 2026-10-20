@@ -18,7 +18,8 @@ public partial class LoginPage : ContentPage
         ErrorBorder.IsVisible = false;
 
         //simular accion de login 
-        await Navigation.PushAsync(new HomeView());
+        App.Current.MainPage = new AppShell();
+
 
         //if (string.IsNullOrWhiteSpace(CorreoEntry.Text) || string.IsNullOrWhiteSpace(ContrasenaEntry.Text))
         //{
@@ -28,7 +29,7 @@ public partial class LoginPage : ContentPage
         //}
 
         // TODO: reemplazar por la llamada a la API cuando esté disponible.
-    
+
     }
 
     private async void OnOlvideContrasenaTapped(object? sender, TappedEventArgs e)
