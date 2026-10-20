@@ -7,10 +7,54 @@
     xmlns:views="clr-namespace:GasApp.Views"
     Title="GasApp">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate views:LoginPage}" 
-        Route="LoginPage"
-         />
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid              
+            Background="LightSlateGray"
+              HeightRequest="100">
+
+                <Label Text="Comercios Perote"
+                   TextColor="White"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center" />
+
+
+
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+
+
+
+
+    <FlyoutItem
+Title="Home"    
+    Icon="casa.png"
+    x:Name="menutabs"
+>
+
+
+
+
+    </FlyoutItem>
+
+
+
+
+
+
+
+    <Shell.FlyoutFooterTemplate>
+        <DataTemplate>
+            <Button Text="Cerrar Sesion"
+                Margin="10"
+                CornerRadius="20"
+                BackgroundColor="LightSlateGray"
+                Clicked="Button_Clicked"
+                />
+        </DataTemplate>
+    </Shell.FlyoutFooterTemplate>
+
 
 </Shell>

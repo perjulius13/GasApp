@@ -17,19 +17,18 @@ public partial class LoginPage : ContentPage
     {
         ErrorBorder.IsVisible = false;
 
-        if (string.IsNullOrWhiteSpace(CorreoEntry.Text) || string.IsNullOrWhiteSpace(ContrasenaEntry.Text))
-        {
-            ErrorLabel.Text = "Ingresa tu correo y tu contraseña.";
-            ErrorBorder.IsVisible = true;
-            return;
-        }
+        //simular accion de login 
+        await Navigation.PushAsync(new HomeView());
+
+        //if (string.IsNullOrWhiteSpace(CorreoEntry.Text) || string.IsNullOrWhiteSpace(ContrasenaEntry.Text))
+        //{
+        //    ErrorLabel.Text = "Ingresa tu correo y tu contraseña.";
+        //    ErrorBorder.IsVisible = true;
+        //    return;
+        //}
 
         // TODO: reemplazar por la llamada a la API cuando esté disponible.
-        SetCargando(true);
-        await Task.Delay(800);
-        SetCargando(false);
-
-        await DisplayAlertAsync("GasApp", "Login simulado correcto.", "OK");
+    
     }
 
     private async void OnOlvideContrasenaTapped(object? sender, TappedEventArgs e)
