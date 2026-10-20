@@ -9,7 +9,7 @@ public partial class MapaView : ContentPage
 	{
 		InitializeComponent();
 
-        getLocation();
+        
         
     }
 
@@ -17,6 +17,13 @@ public partial class MapaView : ContentPage
 
 
     Pin marker = new Pin();
+
+
+    protected override async void OnAppearing()
+    {
+        getLocation();
+
+    }
 
 
 
@@ -29,13 +36,10 @@ public partial class MapaView : ContentPage
         Location location = await Geolocation.Default.GetLocationAsync(request, cts.Token);
 
         if (location != null)
-        {
-            //txtlatitud.Text = location.Latitude.ToString();
-            //txtlongitud.Text = location.Longitude.ToString();
+        {            
             map.MoveToRegion(MapSpan.FromCenterAndRadius(location, Distance.FromKilometers(0.3)));
             addmarker(location.Latitude, location.Longitude, "Ubicacion predeterminada");
-
-            
+            //TODO: ubicar las 10 gasolinerias mas cercanas al usuario             
         }
 
     }

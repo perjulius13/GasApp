@@ -72,6 +72,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\ActividadView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\AyudaView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
