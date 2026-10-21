@@ -1,12 +1,102 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:GasApp.Models"
              x:Class="GasApp.Views.RecompensasView"
-             Title="RecompensasView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Recompensas"
+             BackgroundColor="{AppThemeBinding Light=#F4F6FA, Dark=#0B1320}">
+
+    <CollectionView x:Name="RecompensasCollection"
+                    SelectionMode="None"
+                    Margin="16,8">
+
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />
+        </CollectionView.ItemsLayout>
+
+        <CollectionView.Header>
+            <Grid ColumnDefinitions="*,Auto" Margin="0,8,0,12">
+                <Label Text="Canjea tus puntos"
+                       FontSize="17"
+                       FontFamily="OpenSansSemibold"
+                       TextColor="{AppThemeBinding Light=#0F2A4A, Dark=White}"
+                       VerticalOptions="Center" />
+                <Border Grid.Column="1"
+                        BackgroundColor="#0F2A4A"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 12"
+                        Padding="12,6">
+                    <Label x:Name="PuntosDisponiblesLabel"
+                           Text="1,250 pts"
+                           FontSize="13"
+                           FontFamily="OpenSansSemibold"
+                           TextColor="White" />
+                </Border>
+            </Grid>
+        </CollectionView.Header>
+
+        <CollectionView.EmptyView>
+            <Label Text="No hay recompensas disponibles por ahora."
+                   TextColor="#6B7280"
+                   HorizontalOptions="Center"
+                   Margin="0,40" />
+        </CollectionView.EmptyView>
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:RecompensasClass">
+                <Border BackgroundColor="{AppThemeBinding Light=White, Dark=#16202F}"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 16"
+                        Padding="14">
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+
+                        <Border WidthRequest="52"
+                                HeightRequest="52"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 12"
+                                BackgroundColor="{AppThemeBinding Light=#FFF1E6, Dark=#3A2414}"
+                                VerticalOptions="Center">
+                            <Image Source="recompensa.png"
+                                   WidthRequest="30"
+                                   HeightRequest="30"
+                                   Aspect="AspectFit" />
+                        </Border>
+
+                        <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                            <Label Text="{Binding Titulo}"
+                                   FontSize="15"
+                                   FontFamily="OpenSansSemibold"
+                                   TextColor="{AppThemeBinding Light=#0F2A4A, Dark=White}" />
+                            <Label Text="{Binding Detalle}"
+                                   FontSize="13"
+                                   TextColor="#6B7280"
+                                   LineBreakMode="TailTruncation"
+                                   MaxLines="2" />
+                            <Label Text="{Binding fechafin, StringFormat='Válido hasta {0:dd/MM/yyyy}'}"
+                                   FontSize="12"
+                                   TextColor="#9CA3AF" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="2" Spacing="8" VerticalOptions="Center">
+                            <Label Text="{Binding CostoPuntos, StringFormat='{0} pts'}"
+                                   FontSize="15"
+                                   FontFamily="OpenSansSemibold"
+                                   TextColor="#F97316"
+                                   HorizontalTextAlignment="End" />
+                            <Button Text="Canjear"
+                                    FontSize="13"
+                                    FontFamily="OpenSansSemibold"
+                                    HeightRequest="34"
+                                    Padding="14,0"
+                                    CornerRadius="10"
+                                    TextColor="White"
+                                    BackgroundColor="#F97316"
+                                    CommandParameter="{Binding .}"
+                                    Clicked="OnCanjearClicked" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
 </ContentPage>

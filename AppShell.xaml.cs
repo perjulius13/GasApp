@@ -22,7 +22,7 @@ namespace GasApp
             menutabs.Items.Add(new ShellContent
             {
                 Title = "Home",
-                Icon = "hogar.png",
+                Icon = "casini.png",
                 ContentTemplate = new DataTemplate(typeof(HomeView)),
             });
 
