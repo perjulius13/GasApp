@@ -40,7 +40,7 @@ public partial class HomeView : ContentPage
     }
 
     private async void OnRecompensasTapped(object? sender, TappedEventArgs e)
-        => await DisplayAlertAsync("Canjear", "Catálogo de recompensas pendiente.", "OK");
+        => await Navigation.PushAsync(new RecompensasView());
 
     private async void OnReviewsTapped(object? sender, TappedEventArgs e)
         => await Navigation.PushAsync(new ReviewsView());

@@ -40,6 +40,13 @@ namespace GasApp
                 ContentTemplate = new DataTemplate(typeof(ActividadView)),
             });
 
+            menutabs.Items.Add(new ShellContent
+            {
+                Title = "Recompensas",
+                Icon = "recompensa.png",
+                ContentTemplate = new DataTemplate(typeof(RecompensasView)),
+            });
+
 
         }
 
