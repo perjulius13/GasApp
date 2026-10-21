@@ -2,11 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GasApp.Views.PerfilView"
-             Title="PerfilView">
+             Title="Mi Perfil">
     <VerticalStackLayout>
+        
         <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="Datos del usuario"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        
+        
+        
     </VerticalStackLayout>
 </ContentPage>

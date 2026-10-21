@@ -93,7 +93,7 @@
     <!-- Pestañas inferiores (se llenan en AppShell.xaml.cs → BottomMenu) -->
     <FlyoutItem x:Name="menutabs"
                 Title="Inicio"
-                Icon="hogar.png" />
+                Icon="casini.png" />
 
     <!-- Pie del menú lateral -->
     <Shell.FlyoutFooterTemplate>

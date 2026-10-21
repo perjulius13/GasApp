@@ -1,12 +1,195 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:GasApp.Models"
+             xmlns:conv="clr-namespace:GasApp.Converters"
              x:Class="GasApp.Views.ReviewsView"
-             Title="ReviewsView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Reseñas"
+             BackgroundColor="{AppThemeBinding Light=#F4F6FA, Dark=#0B1320}">
+
+    <ContentPage.Resources>
+        <conv:EstrellasConverter x:Key="EstrellasConverter" />
+        <conv:TextoNoVacioConverter x:Key="TextoNoVacioConverter" />
+
+        <Style x:Key="EstrellaSelector" TargetType="Label">
+            <Setter Property="Text" Value="☆" />
+            <Setter Property="FontSize" Value="34" />
+            <Setter Property="TextColor" Value="#F59E0B" />
+            <Setter Property="Padding" Value="2,0" />
+        </Style>
+    </ContentPage.Resources>
+
+    <CollectionView x:Name="ReviewsCollection"
+                    SelectionMode="None"
+                    Margin="16,0">
+
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />
+        </CollectionView.ItemsLayout>
+
+        <!-- Resumen + formulario -->
+        <CollectionView.Header>
+            <VerticalStackLayout Spacing="16" Padding="0,16,0,12">
+
+                <!-- Resumen de la estación -->
+                <Border BackgroundColor="#0F2A4A"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 18"
+                        Padding="18">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <VerticalStackLayout Spacing="2">
+                            <Label x:Name="NombreEstacionLabel"
+                                   Text="Gasolinera Centro"
+                                   FontSize="18"
+                                   FontFamily="OpenSansSemibold"
+                                   TextColor="White" />
+                            <Label x:Name="TotalReviewsLabel"
+                                   Text="0 reseñas"
+                                   FontSize="13"
+                                   TextColor="#B8C7DB" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1" HorizontalOptions="End">
+                            <Label x:Name="PromedioLabel"
+                                   Text="0.0"
+                                   FontSize="30"
+                                   FontFamily="OpenSansSemibold"
+                                   TextColor="White"
+                                   HorizontalTextAlignment="End" />
+                            <Label x:Name="PromedioEstrellasLabel"
+                                   Text="☆☆☆☆☆"
+                                   FontSize="14"
+                                   TextColor="#F59E0B"
+                                   HorizontalTextAlignment="End" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <!-- Formulario de nueva reseña -->
+                <Border BackgroundColor="{AppThemeBinding Light=White, Dark=#16202F}"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 18"
+                        Padding="18">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Califica esta estación"
+                               FontSize="16"
+                               FontFamily="OpenSansSemibold"
+                               TextColor="{AppThemeBinding Light=#0F2A4A, Dark=White}" />
+
+                        <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">
+                            <Label x:Name="Estrella1" Style="{StaticResource EstrellaSelector}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnEstrellaTapped" CommandParameter="1" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label x:Name="Estrella2" Style="{StaticResource EstrellaSelector}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnEstrellaTapped" CommandParameter="2" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label x:Name="Estrella3" Style="{StaticResource EstrellaSelector}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnEstrellaTapped" CommandParameter="3" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label x:Name="Estrella4" Style="{StaticResource EstrellaSelector}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnEstrellaTapped" CommandParameter="4" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label x:Name="Estrella5" Style="{StaticResource EstrellaSelector}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnEstrellaTapped" CommandParameter="5" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </HorizontalStackLayout>
+
+                        <Label x:Name="CalificacionTextoLabel"
+                               Text="Toca las estrellas para calificar"
+                               FontSize="13"
+                               TextColor="#6B7280"
+                               HorizontalOptions="Center" />
+
+                        <Border StrokeThickness="1"
+                                Stroke="{AppThemeBinding Light=#E2E6EE, Dark=#2C3A50}"
+                                BackgroundColor="{AppThemeBinding Light=#F1F3F7, Dark=#1F2B3D}"
+                                StrokeShape="RoundRectangle 12"
+                                Padding="10,4">
+                            <Editor x:Name="ReviewEditor"
+                                    Placeholder="Cuéntanos tu experiencia (opcional)"
+                                    PlaceholderColor="#6B7280"
+                                    TextColor="{AppThemeBinding Light=#0F2A4A, Dark=White}"
+                                    BackgroundColor="Transparent"
+                                    FontSize="14"
+                                    HeightRequest="90"
+                                    MaxLength="300" />
+                        </Border>
+
+                        <Button x:Name="PublicarButton"
+                                Text="Publicar reseña"
+                                FontFamily="OpenSansSemibold"
+                                FontSize="15"
+                                HeightRequest="46"
+                                CornerRadius="14"
+                                TextColor="White"
+                                BackgroundColor="#F97316"
+                                IsEnabled="False"
+                                Clicked="OnPublicarClicked" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Label Text="Opiniones de usuarios"
+                       FontSize="17"
+                       FontFamily="OpenSansSemibold"
+                       TextColor="{AppThemeBinding Light=#0F2A4A, Dark=White}"
+                       Margin="0,4,0,0" />
+            </VerticalStackLayout>
+        </CollectionView.Header>
+
+        <CollectionView.EmptyView>
+            <Label Text="Aún no hay reseñas. ¡Sé el primero en opinar!"
+                   TextColor="#6B7280"
+                   HorizontalOptions="Center"
+                   Margin="0,24" />
+        </CollectionView.EmptyView>
+
+        <!-- Cada reseña -->
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:ReviewsClass">
+                <Border BackgroundColor="{AppThemeBinding Light=White, Dark=#16202F}"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 16"
+                        Padding="14">
+                    <VerticalStackLayout Spacing="6">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                            <Border WidthRequest="36"
+                                    HeightRequest="36"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 18"
+                                    BackgroundColor="{AppThemeBinding Light=#E8EEF6, Dark=#1F2B3D}">
+                                <Label Text="👤" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                                <Label Text="{Binding IdUserReg, StringFormat='Usuario #{0}'}"
+                                       FontSize="14"
+                                       FontFamily="OpenSansSemibold"
+                                       TextColor="{AppThemeBinding Light=#0F2A4A, Dark=White}" />
+                                <Label Text="{Binding fechareg, StringFormat='{0:dd/MM/yyyy}'}"
+                                       FontSize="12"
+                                       TextColor="#9CA3AF" />
+                            </VerticalStackLayout>
+                            <Label Grid.Column="2"
+                                   Text="{Binding estrellas, Converter={StaticResource EstrellasConverter}}"
+                                   FontSize="15"
+                                   TextColor="#F59E0B"
+                                   VerticalOptions="Center" />
+                        </Grid>
+                        <Label Text="{Binding Review}"
+                               IsVisible="{Binding Review, Converter={StaticResource TextoNoVacioConverter}}"
+                               FontSize="14"
+                               TextColor="{AppThemeBinding Light=#374151, Dark=#CBD5E1}" />
+                    </VerticalStackLayout>
+                </Border>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
 </ContentPage>
