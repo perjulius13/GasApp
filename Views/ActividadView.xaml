@@ -1,12 +1,55 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:GasApp.Models"
              x:Class="GasApp.Views.ActividadView"
-             Title="ActividadView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Actividad Reciente"
+             BackgroundColor="{AppThemeBinding Light=#F4F6FA, Dark=#0B1320}">
+
+    <CollectionView x:Name="HistorialCollection"
+                    SelectionMode="None"
+                    Margin="16,8">
+
+        <CollectionView.Header>
+            <Label Text="Últimos 15 registros"
+                   FontSize="17"
+                   FontFamily="OpenSansSemibold"
+                   TextColor="{AppThemeBinding Light=#0F2A4A, Dark=White}"
+                   Margin="0,8,0,12" />
+        </CollectionView.Header>
+
+        <CollectionView.EmptyView>
+            <Label Text="Aún no tienes registros de puntos."
+                   TextColor="#6B7280"
+                   HorizontalOptions="Center"
+                   Margin="0,40" />
+        </CollectionView.EmptyView>
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:HistorialPuntos">
+                <Grid ColumnDefinitions="*,Auto" Padding="0,10">
+                    <VerticalStackLayout Spacing="2">
+                        <Label Text="{Binding Detalle}"
+                               FontSize="15"
+                               FontFamily="OpenSansSemibold"
+                               TextColor="{AppThemeBinding Light=#0F2A4A, Dark=White}" />
+                        <Label Text="{Binding FechaReg, StringFormat='{0:dd/MM/yyyy HH:mm}'}"
+                               FontSize="13"
+                               TextColor="#6B7280" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="1"
+                           Text="{Binding Cantidad, StringFormat='+{0} pts'}"
+                           FontSize="15"
+                           FontFamily="OpenSansSemibold"
+                           TextColor="#16A34A"
+                           VerticalOptions="Center" />
+                    <BoxView Grid.ColumnSpan="2"
+                             HeightRequest="1"
+                             Color="{AppThemeBinding Light=#E2E6EE, Dark=#2C3A50}"
+                             VerticalOptions="End"
+                             Margin="0,0,0,-10" />
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
 </ContentPage>

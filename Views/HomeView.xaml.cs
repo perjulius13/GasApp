@@ -49,5 +49,9 @@ public partial class HomeView : ContentPage
         => await Navigation.PushAsync(new AyudaView());
 
     private async void OnVerHistorialTapped(object? sender, TappedEventArgs e)
-        => await DisplayAlertAsync("Historial", "Historial de puntos pendiente.", "OK");
+    {
+        //await DisplayAlertAsync("Historial", "Historial de puntos pendiente.", "OK");
+        await Navigation.PushAsync(new ActividadView());
+    }
+        
 }

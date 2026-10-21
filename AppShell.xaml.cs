@@ -33,6 +33,13 @@ namespace GasApp
                 ContentTemplate = new DataTemplate(typeof(MapaView)),
             });
 
+            menutabs.Items.Add(new ShellContent
+            {
+                Title = "Actividad",
+                Icon = "list.png",
+                ContentTemplate = new DataTemplate(typeof(ActividadView)),
+            });
+
 
         }
 
@@ -53,7 +60,7 @@ namespace GasApp
               new ShellContent
               {
                   Title = "Ayuda",
-                  Icon = "informacion.png",
+                  Icon = "info.png",
                   ContentTemplate = new DataTemplate(typeof(AyudaView))
               });
 

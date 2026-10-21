@@ -90,6 +90,9 @@
 	  <MauiXaml Update="Views\PerfilView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\RecompensasView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ReviewsView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
