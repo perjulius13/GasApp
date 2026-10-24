@@ -1,16 +1,328 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:GasApp.Models"
              x:Class="GasApp.Views.PerfilView"
-             Title="Mi Perfil">
-    <VerticalStackLayout>
-        
-        <Label 
-            Text="Datos del usuario"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        
-        
-        
-    </VerticalStackLayout>
+             x:DataType="models:UsuarioClass"
+             Title="Mi Perfil"
+             BackgroundColor="{AppThemeBinding Light=#F6F5F8, Dark=#0A0A0A}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Paleta: negro (principal), morado y dorado (secundarios) -->
+            <Color x:Key="PerfilNegro">#111111</Color>
+            <Color x:Key="PerfilMoradoOscuro">#3B1F5C</Color>
+            <Color x:Key="PerfilDorado">#D4AF37</Color>
+            <Color x:Key="PerfilTextoSecundario">#6B7280</Color>
+
+            <Style x:Key="Tarjeta" TargetType="Border">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#1A1A1D}" />
+                <Setter Property="StrokeThickness" Value="0" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 18" />
+                <Setter Property="Padding" Value="18" />
+                <Setter Property="Shadow">
+                    <Setter.Value>
+                        <Shadow Brush="Black" Opacity="0.07" Radius="12" Offset="0,4" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="TituloSeccion" TargetType="Label">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontFamily" Value="OpenSansSemibold" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light=#111111, Dark=White}" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="CampoEtiqueta" TargetType="Label">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontFamily" Value="OpenSansSemibold" />
+                <Setter Property="TextColor" Value="{StaticResource PerfilTextoSecundario}" />
+                <Setter Property="Margin" Value="4,0,0,4" />
+            </Style>
+
+            <Style x:Key="CampoBorde" TargetType="Border">
+                <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="Stroke" Value="{AppThemeBinding Light=#E6E3EC, Dark=#35303D}" />
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#F2F1F5, Dark=#262130}" />
+                <Setter Property="Padding" Value="12,0" />
+                <Setter Property="HeightRequest" Value="48" />
+            </Style>
+
+            <Style x:Key="CampoEntry" TargetType="Entry">
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="IsReadOnly" Value="True" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light=#111111, Dark=White}" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource PerfilTextoSecundario}" />
+            </Style>
+
+            <Style x:Key="FilaDato" TargetType="Grid">
+                <Setter Property="ColumnDefinitions" Value="*,Auto" />
+                <Setter Property="Padding" Value="0,10" />
+            </Style>
+
+            <Style x:Key="DatoEtiqueta" TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="TextColor" Value="{StaticResource PerfilTextoSecundario}" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="DatoValor" TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontFamily" Value="OpenSansSemibold" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light=#111111, Dark=White}" />
+                <Setter Property="HorizontalTextAlignment" Value="End" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="Separador" TargetType="BoxView">
+                <Setter Property="HeightRequest" Value="1" />
+                <Setter Property="Color" Value="{AppThemeBinding Light=#E6E3EC, Dark=#35303D}" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16,12,16,28" Spacing="18">
+
+            <!-- Encabezado del perfil -->
+            <Border StrokeThickness="0"
+                    StrokeShape="RoundRectangle 24"
+                    Padding="20,24">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="{StaticResource PerfilNegro}" Offset="0.0" />
+                        <GradientStop Color="{StaticResource PerfilMoradoOscuro}" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.Shadow>
+                    <Shadow Brush="Black" Opacity="0.18" Radius="18" Offset="0,8" />
+                </Border.Shadow>
+
+                <VerticalStackLayout Spacing="10">
+                    <!-- Avatar con iniciales -->
+                    <Border WidthRequest="88"
+                            HeightRequest="88"
+                            StrokeThickness="3"
+                            Stroke="#33FFFFFF"
+                            BackgroundColor="{StaticResource PerfilDorado}"
+                            StrokeShape="RoundRectangle 44"
+                            HorizontalOptions="Center">
+                        <Label x:Name="InicialesLabel"
+                               Text="--"
+                               FontSize="32"
+                               FontFamily="OpenSansSemibold"
+                               TextColor="{StaticResource PerfilNegro}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <Label x:Name="NombreCompletoLabel"
+                           FontSize="22"
+                           FontFamily="OpenSansSemibold"
+                           TextColor="White"
+                           HorizontalTextAlignment="Center"
+                           SemanticProperties.HeadingLevel="Level1" />
+
+                    <Label Text="{Binding Username, StringFormat='@{0}'}"
+                           FontSize="14"
+                           TextColor="#CFC6DD"
+                           HorizontalTextAlignment="Center" />
+
+                    <HorizontalStackLayout Spacing="8" HorizontalOptions="Center">
+                        <Border BackgroundColor="#33FFFFFF"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 10"
+                                Padding="10,4">
+                            <Label Text="{Binding Fechaalta, StringFormat='Miembro desde {0:MMM yyyy}'}"
+                                   FontSize="12"
+                                   TextColor="White" />
+                        </Border>
+                        <Border x:Name="EstadoBorder"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 10"
+                                Padding="10,4">
+                            <Label x:Name="EstadoLabel"
+                                   FontSize="12"
+                                   FontFamily="OpenSansSemibold" />
+                        </Border>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Datos personales -->
+            <Border Style="{StaticResource Tarjeta}">
+                <VerticalStackLayout Spacing="14">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="Datos personales" Style="{StaticResource TituloSeccion}" />
+                        <Label x:Name="EditarLabel"
+                               Grid.Column="1"
+                               Text="Editar"
+                               FontSize="14"
+                               FontFamily="OpenSansSemibold"
+                               TextColor="{AppThemeBinding Light=#6D28D9, Dark=#B794F6}"
+                               VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnEditarTapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+
+                    <VerticalStackLayout>
+                        <Label Text="Nombre(s)" Style="{StaticResource CampoEtiqueta}" />
+                        <Border Style="{StaticResource CampoBorde}">
+                            <Entry x:Name="NombreEntry"
+                                   Text="{Binding Nombre}"
+                                   Placeholder="Nombre"
+                                   Style="{StaticResource CampoEntry}" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                        <VerticalStackLayout Grid.Column="0">
+                            <Label Text="Apellido paterno" Style="{StaticResource CampoEtiqueta}" />
+                            <Border Style="{StaticResource CampoBorde}">
+                                <Entry x:Name="PaternoEntry"
+                                       Text="{Binding Paterno}"
+                                       Placeholder="Paterno"
+                                       Style="{StaticResource CampoEntry}" />
+                            </Border>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1">
+                            <Label Text="Apellido materno" Style="{StaticResource CampoEtiqueta}" />
+                            <Border Style="{StaticResource CampoBorde}">
+                                <Entry x:Name="MaternoEntry"
+                                       Text="{Binding Materno}"
+                                       Placeholder="Materno"
+                                       Style="{StaticResource CampoEntry}" />
+                            </Border>
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <VerticalStackLayout>
+                        <Label Text="Género" Style="{StaticResource CampoEtiqueta}" />
+                        <Border Style="{StaticResource CampoBorde}">
+                            <Picker x:Name="GeneroPicker"
+                                    SelectedItem="{Binding Genero}"
+                                    Title="Selecciona"
+                                    IsEnabled="False"
+                                    FontSize="15"
+                                    BackgroundColor="Transparent"
+                                    VerticalOptions="Center"
+                                    TextColor="{AppThemeBinding Light=#111111, Dark=White}"
+                                    TitleColor="{StaticResource PerfilTextoSecundario}">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Masculino</x:String>
+                                        <x:String>Femenino</x:String>
+                                        <x:String>Otro</x:String>
+                                        <x:String>Prefiero no decir</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout>
+                        <Label Text="Teléfono" Style="{StaticResource CampoEtiqueta}" />
+                        <Border Style="{StaticResource CampoBorde}">
+                            <Entry x:Name="TelefonoEntry"
+                                   Text="{Binding Telefono}"
+                                   Placeholder="10 dígitos"
+                                   Keyboard="Telephone"
+                                   MaxLength="10"
+                                   Style="{StaticResource CampoEntry}" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout>
+                        <Label Text="Correo electrónico" Style="{StaticResource CampoEtiqueta}" />
+                        <Border Style="{StaticResource CampoBorde}">
+                            <Entry x:Name="EmailEntry"
+                                   Text="{Binding Email}"
+                                   Placeholder="tucorreo@ejemplo.com"
+                                   Keyboard="Email"
+                                   IsSpellCheckEnabled="False"
+                                   Style="{StaticResource CampoEntry}" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <!-- Botones de edición (ocultos hasta tocar "Editar") -->
+                    <Grid x:Name="BotonesEdicion"
+                          IsVisible="False"
+                          ColumnDefinitions="*,*"
+                          ColumnSpacing="12"
+                          Margin="0,4,0,0">
+                        <Button Grid.Column="0"
+                                Text="Cancelar"
+                                FontFamily="OpenSansSemibold"
+                                HeightRequest="46"
+                                CornerRadius="14"
+                                TextColor="{AppThemeBinding Light=#111111, Dark=White}"
+                                BackgroundColor="{AppThemeBinding Light=#F2F1F5, Dark=#262130}"
+                                Clicked="OnCancelarClicked" />
+                        <Button Grid.Column="1"
+                                Text="Guardar"
+                                FontFamily="OpenSansSemibold"
+                                HeightRequest="46"
+                                CornerRadius="14"
+                                TextColor="#111111"
+                                BackgroundColor="{StaticResource PerfilDorado}"
+                                Clicked="OnGuardarClicked" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Información de la cuenta -->
+            <Border Style="{StaticResource Tarjeta}" Padding="18,12">
+                <VerticalStackLayout>
+                    <Label Text="Cuenta" Style="{StaticResource TituloSeccion}" Margin="0,4,0,6" />
+
+                    <Grid Style="{StaticResource FilaDato}">
+                        <Label Text="No. de cliente" Style="{StaticResource DatoEtiqueta}" />
+                        <Label Grid.Column="1" Text="{Binding Id, StringFormat='#{0:D6}'}" Style="{StaticResource DatoValor}" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Separador}" />
+
+                    <Grid Style="{StaticResource FilaDato}">
+                        <Label Text="Usuario" Style="{StaticResource DatoEtiqueta}" />
+                        <Label Grid.Column="1" Text="{Binding Username}" Style="{StaticResource DatoValor}" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Separador}" />
+
+                    <Grid Style="{StaticResource FilaDato}">
+                        <Label Text="Fecha de alta" Style="{StaticResource DatoEtiqueta}" />
+                        <Label Grid.Column="1" Text="{Binding Fechaalta, StringFormat='{0:dd/MM/yyyy}'}" Style="{StaticResource DatoValor}" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Opciones -->
+            <Border Style="{StaticResource Tarjeta}" Padding="18,6">
+                <VerticalStackLayout>
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12" Padding="0,14">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnCambiarContrasenaTapped" />
+                        </Grid.GestureRecognizers>
+                        <Label Text="🔒" FontSize="18" VerticalOptions="Center" />
+                        <Label Grid.Column="1" Text="Cambiar contraseña" Style="{StaticResource DatoValor}" HorizontalTextAlignment="Start" />
+                        <Label Grid.Column="2" Text="›" FontSize="22" TextColor="{StaticResource PerfilTextoSecundario}" VerticalOptions="Center" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Separador}" />
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12" Padding="0,14">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnCerrarSesionTapped" />
+                        </Grid.GestureRecognizers>
+                        <Label Text="🚪" FontSize="18" VerticalOptions="Center" />
+                        <Label Grid.Column="1" Text="Cerrar sesión" FontSize="14" FontFamily="OpenSansSemibold" TextColor="#DC2626" VerticalOptions="Center" />
+                        <Label Grid.Column="2" Text="›" FontSize="22" TextColor="{StaticResource PerfilTextoSecundario}" VerticalOptions="Center" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
