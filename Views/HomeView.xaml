@@ -8,14 +8,14 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <!-- Misma paleta que LoginPage -->
-            <Color x:Key="HomeAcento">#F97316</Color>
-            <Color x:Key="HomeAzul">#0F2A4A</Color>
-            <Color x:Key="HomeAzulMedio">#1E4976</Color>
-            <Color x:Key="HomeFondoClaro">#F4F6FA</Color>
-            <Color x:Key="HomeFondoOscuro">#0B1320</Color>
+            <!-- Paleta: negro (principal), morado y dorado (secundarios) -->
+            <Color x:Key="HomeAcento">#D4AF37</Color>
+            <Color x:Key="HomeNegro">#111111</Color>
+            <Color x:Key="HomeMoradoOscuro">#3B1F5C</Color>
+            <Color x:Key="HomeFondoClaro">#F6F5F8</Color>
+            <Color x:Key="HomeFondoOscuro">#0A0A0A</Color>
             <Color x:Key="HomeTarjetaClaro">#FFFFFF</Color>
-            <Color x:Key="HomeTarjetaOscuro">#16202F</Color>
+            <Color x:Key="HomeTarjetaOscuro">#1A1A1D</Color>
             <Color x:Key="HomeTextoSecundario">#6B7280</Color>
             <Color x:Key="HomeVerde">#16A34A</Color>
 
@@ -34,14 +34,14 @@
             <Style x:Key="TituloSeccion" TargetType="Label">
                 <Setter Property="FontSize" Value="17" />
                 <Setter Property="FontFamily" Value="OpenSansSemibold" />
-                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource HomeAzul}, Dark=White}" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource HomeNegro}, Dark=White}" />
                 <Setter Property="VerticalOptions" Value="Center" />
             </Style>
 
             <Style x:Key="EnlaceSeccion" TargetType="Label">
                 <Setter Property="FontSize" Value="13" />
                 <Setter Property="FontFamily" Value="OpenSansSemibold" />
-                <Setter Property="TextColor" Value="{StaticResource HomeAcento}" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light=#6D28D9, Dark=#B794F6}" />
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="HorizontalOptions" Value="End" />
             </Style>
@@ -49,7 +49,7 @@
             <Style x:Key="TextoPrincipal" TargetType="Label">
                 <Setter Property="FontSize" Value="15" />
                 <Setter Property="FontFamily" Value="OpenSansSemibold" />
-                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource HomeAzul}, Dark=White}" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource HomeNegro}, Dark=White}" />
             </Style>
 
             <Style x:Key="TextoSecundario" TargetType="Label">
@@ -75,7 +75,7 @@
                 <Setter Property="HeightRequest" Value="46" />
                 <Setter Property="StrokeThickness" Value="0" />
                 <Setter Property="StrokeShape" Value="RoundRectangle 14" />
-                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#FFF1E6, Dark=#3A2414}" />
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#FAF3DC, Dark=#3A3214}" />
                 <Setter Property="HorizontalOptions" Value="Center" />
             </Style>
 
@@ -83,7 +83,7 @@
                 <Setter Property="FontSize" Value="12" />
                 <Setter Property="FontFamily" Value="OpenSansSemibold" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
-                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource HomeAzul}, Dark=#CBD5E1}" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource HomeNegro}, Dark=#D4D4D8}" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -97,7 +97,7 @@
                        Text="¡Hola, Usuario! 👋"
                        FontSize="24"
                        FontFamily="OpenSansSemibold"
-                       TextColor="{AppThemeBinding Light={StaticResource HomeAzul}, Dark=White}"
+                       TextColor="{AppThemeBinding Light={StaticResource HomeNegro}, Dark=White}"
                        SemanticProperties.HeadingLevel="Level1" />
                 <Label Text="¿Listo para tu próxima carga?"
                        Style="{StaticResource TextoSecundario}"
@@ -110,8 +110,8 @@
                     Padding="20">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Color="{StaticResource HomeAzul}" Offset="0.0" />
-                        <GradientStop Color="{StaticResource HomeAzulMedio}" Offset="1.0" />
+                        <GradientStop Color="{StaticResource HomeNegro}" Offset="0.0" />
+                        <GradientStop Color="{StaticResource HomeMoradoOscuro}" Offset="1.0" />
                     </LinearGradientBrush>
                 </Border.Background>
                 <Border.Shadow>
@@ -121,7 +121,7 @@
                 <VerticalStackLayout Spacing="14">
                     <Grid ColumnDefinitions="*,Auto">
                         <VerticalStackLayout Spacing="2">
-                            <Label Text="Tus puntos" FontSize="13" TextColor="#B8C7DB" />
+                            <Label Text="Tus puntos" FontSize="13" TextColor="#CFC6DD" />
                             <HorizontalStackLayout Spacing="6">
                                 <Label x:Name="PuntosLabel"
                                        Text="1,250"
@@ -130,7 +130,7 @@
                                        TextColor="White" />
                                 <Label Text="pts"
                                        FontSize="16"
-                                       TextColor="#B8C7DB"
+                                       TextColor="#CFC6DD"
                                        VerticalOptions="End"
                                        Margin="0,0,0,7" />
                             </HorizontalStackLayout>
@@ -161,7 +161,7 @@
                         <Label x:Name="SiguienteNivelLabel"
                                Text="Te faltan 750 pts para Nivel Platino"
                                FontSize="12"
-                               TextColor="#B8C7DB" />
+                               TextColor="#CFC6DD" />
                     </VerticalStackLayout>
 
                     <Button Text="Mostrar mi código"
@@ -169,7 +169,7 @@
                             FontSize="15"
                             HeightRequest="46"
                             CornerRadius="14"
-                            TextColor="White"
+                            TextColor="#111111"
                             BackgroundColor="{StaticResource HomeAcento}"
                             Clicked="OnMostrarCodigoClicked"
                             SemanticProperties.Hint="Muestra tu código para acumular puntos en la estación" />
@@ -231,16 +231,16 @@
             <Border StrokeThickness="0"
                     StrokeShape="RoundRectangle 18"
                     Padding="16"
-                    BackgroundColor="{AppThemeBinding Light=#FFF1E6, Dark=#3A2414}">
+                    BackgroundColor="{AppThemeBinding Light=#FAF3DC, Dark=#3A3214}">
                 <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
                     <VerticalStackLayout Spacing="4" VerticalOptions="Center">
                         <Label Text="Puntos dobles este fin de semana"
                                FontSize="15"
                                FontFamily="OpenSansSemibold"
-                               TextColor="{AppThemeBinding Light=#9A3412, Dark=#FDBA74}" />
+                               TextColor="{AppThemeBinding Light=#6B5310, Dark=#E8CB6A}" />
                         <Label Text="Carga Premium en estaciones participantes y gana el doble."
                                FontSize="13"
-                               TextColor="{AppThemeBinding Light=#9A3412, Dark=#FED7AA}" />
+                               TextColor="{AppThemeBinding Light=#6B5310, Dark=#F2E3B3}" />
                     </VerticalStackLayout>
                     <Label Grid.Column="1"
                            Text="🔥"
@@ -274,7 +274,7 @@
                                             HeightRequest="44"
                                             StrokeThickness="0"
                                             StrokeShape="RoundRectangle 12"
-                                            BackgroundColor="{AppThemeBinding Light=#E8EEF6, Dark=#1F2B3D}"
+                                            BackgroundColor="{AppThemeBinding Light=#F1ECF8, Dark=#262130}"
                                             VerticalOptions="Start">
                                         <Label Text="⛽" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
                                     </Border>
@@ -288,7 +288,7 @@
                                         <Label Text="{Binding Distancia}"
                                                FontSize="13"
                                                FontFamily="OpenSansSemibold"
-                                               TextColor="{StaticResource HomeAcento}"
+                                               TextColor="{AppThemeBinding Light=#6D28D9, Dark=#B794F6}"
                                                HorizontalTextAlignment="End" />
                                         <Label Text="{Binding Calificacion, StringFormat='★ {0}'}"
                                                FontSize="12"

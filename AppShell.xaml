@@ -6,16 +6,16 @@
     xmlns:local="clr-namespace:GasApp"
     xmlns:views="clr-namespace:GasApp.Views"
     Title="GasApp"
-    FlyoutBackgroundColor="{AppThemeBinding Light=White, Dark=#0B1320}"
+    FlyoutBackgroundColor="{AppThemeBinding Light=White, Dark=#0A0A0A}"
     FlyoutWidth="290"
-    Shell.BackgroundColor="#0F2A4A"
+    Shell.BackgroundColor="#111111"
     Shell.ForegroundColor="White"
     Shell.TitleColor="White"
     Shell.NavBarHasShadow="True"
-    Shell.TabBarBackgroundColor="{AppThemeBinding Light=White, Dark=#16202F}"
-    Shell.TabBarForegroundColor="#F97316"
-    Shell.TabBarTitleColor="#F97316"
-    Shell.TabBarUnselectedColor="{AppThemeBinding Light=#6B7280, Dark=#94A3B8}">
+    Shell.TabBarBackgroundColor="{AppThemeBinding Light=White, Dark=#1A1A1D}"
+    Shell.TabBarForegroundColor="{AppThemeBinding Light=#6D28D9, Dark=#D4AF37}"
+    Shell.TabBarTitleColor="{AppThemeBinding Light=#6D28D9, Dark=#D4AF37}"
+    Shell.TabBarUnselectedColor="{AppThemeBinding Light=#6B7280, Dark=#A1A1AA}">
 
     <!-- Encabezado del menú lateral -->
     <Shell.FlyoutHeaderTemplate>
@@ -23,8 +23,8 @@
             <Grid HeightRequest="180" Padding="20,36,20,18">
                 <Grid.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Color="#0F2A4A" Offset="0.0" />
-                        <GradientStop Color="#1E4976" Offset="1.0" />
+                        <GradientStop Color="#111111" Offset="0.0" />
+                        <GradientStop Color="#3B1F5C" Offset="1.0" />
                     </LinearGradientBrush>
                 </Grid.Background>
 
@@ -33,7 +33,7 @@
                             HeightRequest="56"
                             StrokeThickness="0"
                             StrokeShape="RoundRectangle 16"
-                            BackgroundColor="#F97316"
+                            BackgroundColor="#D4AF37"
                             HorizontalOptions="Start">
                         <Label Text="⛽"
                                FontSize="28"
@@ -46,7 +46,7 @@
                            TextColor="White" />
                     <Label Text="Carga gasolina y gana puntos"
                            FontSize="13"
-                           TextColor="#B8C7DB" />
+                           TextColor="#CFC6DD" />
                 </VerticalStackLayout>
             </Grid>
         </DataTemplate>
@@ -69,7 +69,7 @@
                             </VisualState>
                             <VisualState x:Name="Selected">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#FFF1E6, Dark=#3A2414}" />
+                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#FAF3DC, Dark=#3A3214}" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
@@ -84,7 +84,7 @@
                        Text="{Binding Title}"
                        FontSize="15"
                        FontFamily="OpenSansSemibold"
-                       TextColor="{AppThemeBinding Light=#0F2A4A, Dark=#E2E8F0}"
+                       TextColor="{AppThemeBinding Light=#111111, Dark=#E4E4E7}"
                        VerticalOptions="Center" />
             </Grid>
         </DataTemplate>
@@ -100,7 +100,7 @@
         <DataTemplate>
             <VerticalStackLayout Padding="20,12,20,24" Spacing="12">
                 <BoxView HeightRequest="1"
-                         Color="{AppThemeBinding Light=#E2E6EE, Dark=#2C3A50}" />
+                         Color="{AppThemeBinding Light=#E6E3EC, Dark=#35303D}" />
                 <Button Text="Cerrar sesión"
                         FontFamily="OpenSansSemibold"
                         FontSize="15"

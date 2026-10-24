@@ -8,22 +8,22 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <!-- Paleta de la pantalla de login -->
-            <Color x:Key="LoginAcento">#F97316</Color>
-            <Color x:Key="LoginAcentoOscuro">#C2410C</Color>
-            <Color x:Key="LoginAzul">#0F2A4A</Color>
-            <Color x:Key="LoginFondoClaro">#F4F6FA</Color>
-            <Color x:Key="LoginFondoOscuro">#0B1320</Color>
+            <Color x:Key="LoginAcento">#D4AF37</Color>
+            <Color x:Key="LoginAcentoOscuro">#A8861F</Color>
+            <Color x:Key="LoginNegro">#111111</Color>
+            <Color x:Key="LoginFondoClaro">#F6F5F8</Color>
+            <Color x:Key="LoginFondoOscuro">#0A0A0A</Color>
             <Color x:Key="LoginTarjetaClaro">#FFFFFF</Color>
-            <Color x:Key="LoginTarjetaOscuro">#16202F</Color>
-            <Color x:Key="LoginCampoClaro">#F1F3F7</Color>
-            <Color x:Key="LoginCampoOscuro">#1F2B3D</Color>
+            <Color x:Key="LoginTarjetaOscuro">#1A1A1D</Color>
+            <Color x:Key="LoginCampoClaro">#F2F1F5</Color>
+            <Color x:Key="LoginCampoOscuro">#262130</Color>
             <Color x:Key="LoginTextoSecundario">#6B7280</Color>
 
             <!-- Contenedor de cada campo de texto -->
             <Style x:Key="CampoBorde" TargetType="Border">
                 <Setter Property="StrokeShape" Value="RoundRectangle 12" />
                 <Setter Property="StrokeThickness" Value="1" />
-                <Setter Property="Stroke" Value="{AppThemeBinding Light=#E2E6EE, Dark=#2C3A50}" />
+                <Setter Property="Stroke" Value="{AppThemeBinding Light=#E6E3EC, Dark=#35303D}" />
                 <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LoginCampoClaro}, Dark={StaticResource LoginCampoOscuro}}" />
                 <Setter Property="Padding" Value="14,2" />
                 <Setter Property="HeightRequest" Value="52" />
@@ -33,14 +33,14 @@
                 <Setter Property="FontSize" Value="15" />
                 <Setter Property="BackgroundColor" Value="Transparent" />
                 <Setter Property="VerticalOptions" Value="Center" />
-                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LoginAzul}, Dark=White}" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LoginNegro}, Dark=White}" />
                 <Setter Property="PlaceholderColor" Value="{StaticResource LoginTextoSecundario}" />
             </Style>
 
             <Style x:Key="CampoEtiqueta" TargetType="Label">
                 <Setter Property="FontSize" Value="13" />
                 <Setter Property="FontFamily" Value="OpenSansSemibold" />
-                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LoginAzul}, Dark=#CBD5E1}" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LoginNegro}, Dark=#D4D4D8}" />
                 <Setter Property="Margin" Value="4,0,0,6" />
             </Style>
         </ResourceDictionary>
@@ -54,8 +54,8 @@
               Padding="24,48,24,0">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="{StaticResource LoginAzul}" Offset="0.0" />
-                    <GradientStop Color="#1E4976" Offset="1.0" />
+                    <GradientStop Color="{StaticResource LoginNegro}" Offset="0.0" />
+                    <GradientStop Color="#3B1F5C" Offset="1.0" />
                 </LinearGradientBrush>
             </Grid.Background>
 
@@ -82,7 +82,7 @@
 
                 <Label Text="Carga gasolina y gana puntos"
                        FontSize="14"
-                       TextColor="#B8C7DB"
+                       TextColor="#CFC6DD"
                        HorizontalOptions="Center" />
             </VerticalStackLayout>
         </Grid>
@@ -105,7 +105,7 @@
                             <Label Text="Iniciar sesión"
                                    FontSize="22"
                                    FontFamily="OpenSansSemibold"
-                                   TextColor="{AppThemeBinding Light={StaticResource LoginAzul}, Dark=White}"
+                                   TextColor="{AppThemeBinding Light={StaticResource LoginNegro}, Dark=White}"
                                    SemanticProperties.HeadingLevel="Level2" />
                             <Label Text="Ingresa con tu cuenta para consultar tus puntos."
                                    FontSize="14"
@@ -144,7 +144,7 @@
                                            Text="Mostrar"
                                            FontSize="13"
                                            FontFamily="OpenSansSemibold"
-                                           TextColor="{StaticResource LoginAcento}"
+                                           TextColor="{AppThemeBinding Light=#6D28D9, Dark=#B794F6}"
                                            VerticalOptions="Center"
                                            Padding="8,0,0,0">
                                         <Label.GestureRecognizers>
@@ -159,7 +159,7 @@
                         <Grid ColumnDefinitions="Auto,*,Auto">
                             <CheckBox x:Name="RecordarmeCheck"
                                       Grid.Column="0"
-                                      Color="{StaticResource LoginAcento}"
+                                      Color="{AppThemeBinding Light=#6D28D9, Dark=#B794F6}"
                                       VerticalOptions="Center" />
                             <Label Grid.Column="1"
                                    Text="Recordarme"
@@ -170,7 +170,7 @@
                                    Text="¿Olvidaste tu contraseña?"
                                    FontSize="13"
                                    FontFamily="OpenSansSemibold"
-                                   TextColor="{StaticResource LoginAcento}"
+                                   TextColor="{AppThemeBinding Light=#6D28D9, Dark=#B794F6}"
                                    VerticalOptions="Center">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnOlvideContrasenaTapped" />
@@ -198,14 +198,14 @@
                                     FontFamily="OpenSansSemibold"
                                     HeightRequest="52"
                                     CornerRadius="14"
-                                    TextColor="White"
+                                    TextColor="#111111"
                                     BackgroundColor="{StaticResource LoginAcento}"
                                     Clicked="OnIngresarClicked"
                                     SemanticProperties.Hint="Inicia sesión con tu correo y contraseña" />
                             <ActivityIndicator x:Name="CargandoIndicator"
                                                IsRunning="False"
                                                IsVisible="False"
-                                               Color="White"
+                                               Color="#111111"
                                                HeightRequest="24"
                                                WidthRequest="24"
                                                HorizontalOptions="Center"
@@ -223,7 +223,7 @@
                     <Label Text="Regístrate"
                            FontSize="14"
                            FontFamily="OpenSansSemibold"
-                           TextColor="{StaticResource LoginAcento}">
+                           TextColor="{AppThemeBinding Light=#6D28D9, Dark=#B794F6}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnRegistrateTapped" />
                         </Label.GestureRecognizers>
