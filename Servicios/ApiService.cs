@@ -25,7 +25,7 @@ namespace GasApp.Servicios
         }
 
 
-        public async Task<bool> Login(UsuarioClass user)
+        public async Task<UsuarioClass> Login(UsuarioClass user)
         {            
             string url = "https://www.urbanitycore.com/api/Usuario/Login";
 
@@ -35,7 +35,9 @@ namespace GasApp.Servicios
                 
                 if (response.IsSuccessStatusCode)
                 {
-                    return true;
+                    //return true;
+                    var json = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<UsuarioClass>(json);
                 }
             }
             catch (Exception ex)
@@ -43,7 +45,7 @@ namespace GasApp.Servicios
                 Console.WriteLine($"Error en la petición: {ex.Message}");
             }
 
-            return false;
+            return new UsuarioClass();
         }
 
 

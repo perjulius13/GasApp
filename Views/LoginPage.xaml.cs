@@ -8,6 +8,9 @@ public partial class LoginPage : ContentPage
     private const string ClaveUsuarioRecordado = "usuario_recordado";
     private readonly ApiService _api = new();
 
+
+    UsuarioClass user = new UsuarioClass(); 
+
     public LoginPage()
     {
         InitializeComponent();
@@ -52,21 +55,35 @@ public partial class LoginPage : ContentPage
         }
 
         SetCargando(true);
-        bool loginCorrecto;
+        bool loginCorrecto = false;
         try
         {
-            loginCorrecto = await _api.Login(new UsuarioClass { Username = username, Contra = contra });
+            user = await _api.Login(new UsuarioClass { Username = username, Contra = contra });
+            if(user.Username == username && user.Contra == contra)
+            {
+                loginCorrecto = true;   
+            }
         }
         finally
         {
             SetCargando(false);
         }
 
+
         if (!loginCorrecto)
         {
             MostrarError("Usuario o contraseña incorrectos.");
             ContrasenaEntry.Text = string.Empty;
             return;
+        }
+
+        //guardar algunos campos 
+        if (loginCorrecto)
+        {
+            Preferences.Default.Set("idusuario", user.Id);
+            Preferences.Default.Set("username", user.Username);
+            Preferences.Default.Set("tipousuario", user.TipoUser);
+            Preferences.Default.Set("nombreuser", user.Nombre);
         }
 
         if (RecordarmeCheck.IsChecked)
