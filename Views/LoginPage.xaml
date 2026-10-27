@@ -112,18 +112,19 @@
                                    TextColor="{StaticResource LoginTextoSecundario}" />
                         </VerticalStackLayout>
 
-                        <!-- Correo -->
+                        <!-- Usuario -->
                         <VerticalStackLayout>
-                            <Label Text="Correo electrónico" Style="{StaticResource CampoEtiqueta}" />
+                            <Label Text="Usuario" Style="{StaticResource CampoEtiqueta}" />
                             <Border Style="{StaticResource CampoBorde}">
-                                <Entry x:Name="CorreoEntry"
-                                       Placeholder="tucorreo@ejemplo.com"
-                                       Keyboard="Email"
+                                <Entry x:Name="UsuarioEntry"
+                                       Placeholder="Tu nombre de usuario"
+                                       Keyboard="Plain"
                                        IsSpellCheckEnabled="False"
                                        IsTextPredictionEnabled="False"
                                        ReturnType="Next"
                                        Style="{StaticResource CampoEntry}"
-                                       SemanticProperties.Description="Correo electrónico" />
+                                       SemanticProperties.Description="Nombre de usuario"
+                                       Completed="OnUsuarioCompleted" />
                             </Border>
                         </VerticalStackLayout>
 
@@ -137,6 +138,7 @@
                                            Placeholder="••••••••"
                                            IsPassword="True"
                                            ReturnType="Done"
+                                           Completed="OnIngresarClicked"
                                            Style="{StaticResource CampoEntry}"
                                            SemanticProperties.Description="Contraseña" />
                                     <Label x:Name="MostrarContrasenaLabel"
@@ -201,7 +203,7 @@
                                     TextColor="#111111"
                                     BackgroundColor="{StaticResource LoginAcento}"
                                     Clicked="OnIngresarClicked"
-                                    SemanticProperties.Hint="Inicia sesión con tu correo y contraseña" />
+                                    SemanticProperties.Hint="Inicia sesión con tu usuario y contraseña" />
                             <ActivityIndicator x:Name="CargandoIndicator"
                                                IsRunning="False"
                                                IsVisible="False"

@@ -1,3 +1,5 @@
+using GasApp.Models;
+using GasApp.Servicios;
 using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Maps;
 
@@ -14,15 +16,13 @@ public partial class MapaView : ContentPage
     }
 
 
-
-
     Pin marker = new Pin();
-
+    List<ComercioClass> lista = new List<ComercioClass>();
 
     protected override async void OnAppearing()
     {
         getLocation();
-
+        llenarmarcadores(); 
     }
 
 
@@ -57,8 +57,16 @@ public partial class MapaView : ContentPage
     }
 
 
+    public async void llenarmarcadores()
+    {
+        var servicio = new ApiService(); 
+        lista = await servicio.ListarComercios();
 
-
+        foreach (var item in lista)
+        {
+            addmarker(item.Latitud, item.Longitud, item.IdComer.ToString());
+        }
+    }
 
 
 

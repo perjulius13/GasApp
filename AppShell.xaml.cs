@@ -1,4 +1,4 @@
-﻿using GasApp.Views; 
+using GasApp.Views; 
 
 namespace GasApp
 {
@@ -76,7 +76,8 @@ namespace GasApp
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            App.Current.MainPage = new LoginPage();
+            if (Application.Current?.Windows.Count > 0)
+                Application.Current.Windows[0].Page = new LoginPage();
         }
 
 

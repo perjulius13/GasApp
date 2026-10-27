@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GasApp
 {
@@ -11,7 +11,8 @@ namespace GasApp
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new AppShell());
+            // La app siempre inicia en el login; al autenticarse se cambia a AppShell.
+            return new Window(new Views.LoginPage());
         }
     }
 }
